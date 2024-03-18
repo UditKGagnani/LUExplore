@@ -1,0 +1,310 @@
+<!--rgba(234, 20, 29, 0.5), rgba(81, 173, 218, 0.9)-->
+<!--rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25), url("../static/img/bg2.jpg")-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>LU-EXPLORE</title>
+        <link rel="icon" type="image/x-icon" href="static/MYLOGO.jpg" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="static/style.css" rel="stylesheet" />
+    </head>
+    <body style="background-image: url('../static/img/intro5.jpg');">
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">LU-EXPLORE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/">Home</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="properties.html">LU-PROPERTIES</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="news.html">LU-NEWS</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="itinerary.html">LU-ITINERARY</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="food.html">LU-FOOD</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded" >
+                            <h2 class="section-heading mb-5">
+                                <span class="section-heading-upper">LU-FOOD</span>
+                                <span class="section-heading-lower" style="display: block; font-size: 2.5rem; font-weight: 100;">RECOGNIZE LUXEMBOURGISH DISH</span>
+                            </h2>
+                            <form action="submit_food" method="POST" enctype="multipart/form-data" novalidate>
+                                <div class="container col-md-6">
+                                    <div class="mb-5">
+                                        <label class="form-label">Upload Image of the Dish</label>
+                                        <input class="form-control" type="file" name="formFile" onchange="validateImage(); preview();" required>
+                                        <div class="valid-feedback">Image validated</div>
+                                        <div class="invalid-feedback">Please Select an Image</div>
+                                        <button type="submit" class="btn into-button mt-3" style="background-color: white; color: black;">Submit</button>
+                                    </div>
+                                    <img id="frame" class="img-fluid" src="" />
+                                </div>
+                                {% if errors %}
+                                    <div class="errors my-4">
+                                        <ul>
+                                            {% for error in errors %}
+                                                <li><em>{{ error }}</em></li>
+                                                <li><br /></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% if food %}
+            <section class="page-section cta">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-8 mx-auto">
+                            <div class="cta-inner bg-faded text-center rounded">
+                                <img class="img-fluid" src={{file_path}} />
+                                <div><br /></div>
+                                {% if food=='Bouneschlupp' %}
+                                    <div><em><strong>This Dish is Bouneschlupp</strong></em></div>
+                                    <div><p>Bouneschlupp, a traditional Luxembourgish soup, features green beans, potatoes,
+                                        smoked bacon, and onions. Variants in different regions might introduce carrots,
+                                        leeks, or celery, along with spiced sausages like Metworst. While it's a staple in Luxembourg,
+                                        it's also enjoyed in Saarland (Germany), Lorraine (France), and historical areas of Belgium
+                                        like Gaume and Arelerland. Typically, served hot, it accompanies potato pancakes (gromperekichelchen)
+                                        and, optionally, a dollop of sour cream.</p></div>
+                                    <br />
+                                    <div><strong>Ingredients:</strong></div>
+                                    <div>1 onion, 400g French beans, 1 large potato, 30g Luxlait Rose butter</div>
+                                    <div>2 tbsp flour, 1.5l vegetable stock, 1 bay leaf, 2 tsp summer savoury (Bounekräitchen)</div>
+                                    <div>2 Mettwurscht sausages, 100ml Luxlait cream, to serve</div>
+                                    <br />
+                                    <div><strong>Procedure:</strong></div>
+                                    <div>Peel and finely chop the onion.</div>
+                                    <div>Trim the French beans and cut into bite-sized pieces. Peel the potato and cut into 1 cm cubes. Set aside.</div>
+                                    <div>Melt the butter in a large saucepan and fry the onion for 4 minutes until soft. Add the flour and fry for another minute, then add the vegetable stock, beans and potatoes with the bay leaf and summer savoury.</div>
+                                    <div>Bring to the boil, cover and simmer for 10 minutes, until the vegetables are cooked through.</div>
+                                    <div>Meanwhile, slice the Mettwurscht sausages.</div>
+                                    <div>After 10 minutes, add the Mettwurscht slices and cook for another 5 minutes.</div>
+                                    <div>Stir through the cream and distribute the soup between four plates, serve immediately.</div>
+                                {% endif %}
+
+                                {% if food=='Gromperekichelcher' %}
+                                    <div><em><strong>This Dish is Gromperekichelcher</strong></em></div>
+                                    <div><p>Gromperekichelcher represents Luxembourg's take on potato pancakes,
+                                        made from grated potatoes, shallots, garlic, parsley, eggs, and flour.
+                                        Once mixed, the batter is seasoned with salt, pepper, and a hint of nutmeg,
+                                        shaped into small pancakes, and fried in oil until crispy. Enjoyed either as a
+                                        standalone snack or as a complement to savory dishes, these fritters offer a
+                                        delightful culinary experience.</p></div>
+                                    <br />
+                                    <div><strong>Ingredients:</strong></div>
+                                    <div>2 potatoes (300g), 1 onion (100g), 1 egg, 2 tbsp flour, ½ tsp salt</div>
+                                    <div>1 tbsp parsley(chopped), sunflower oil, apple compote, to serve</div>
+                                    <div>OR Apple chutney:</div>
+                                    <div>2 apples, 1 small onion, 1 tbsp sunflower oil, 100g sugar</div>
+                                    <div>100ml white wine vinegar, ½ tsp salt, pepper</div>
+                                    <br />
+                                    <div><strong>Procedure:</strong></div>
+                                    <div>Peel the potatoes and onion, grate and put into a bowl. Add the egg, flour,
+                                        salt and parsley, mix well and leave to rest for 30 minutes.</div>
+                                    <div>When the Gromperekichelcher are ready, stir the potato mix,
+                                        as it will have gathered some water at the bottom of the bowl.</div>
+                                    <div>Pour some sunflower oil into a frying pan, so that the entire bottom of the pan
+                                        is covered in oil. Heat the oil and test if the oil is hot enough by dropping a
+                                        tiny bit of batter in – if it starts bubbling, you’re ready.</div>
+                                    <div>Divide the potato mix into 4 portions and form 4 Gromperekichelcher in the pan.</div>
+                                    <div>Fry on each side for about 2-3 minutes. Take out of the pan and put onto a plate
+                                        lined with kitchen paper, to absorb some of the grease.</div>
+                                    <div>Sprinkle with a bit of salt and serve immediately with a dollop of apple compote or apple chutney.</div>
+                                    <div>For the apple chutney: Cut open the apples, core, peel and cut into 2cm cubes.
+                                        Peel and finely chop the onion. Fry the onion in oil with a pinch of salt for
+                                        4 minutes until soft. Add the apples, sugar, vinegar, salt and a bit of pepper.
+                                        Cover and cook for 3 minutes until the apple has softened. Uncover and cook for another 6 minutes,
+                                        stirring regularly, until the liquid has evaporated. Take off the heat and mash with a potato masher.
+                                        Set aside to cool.</div>
+                                {% endif %}
+
+                                {% if food=='Huesenziwwi' %}
+                                    <div><em><strong>This Dish is Huesenziwwi</strong></em></div>
+                                    <div><p>Huesenziwwi, a well-loved Luxembourgish dish, features marinated hare pieces
+                                        simmered with wine and onions in a sauce thickened with hare's blood.
+                                        Variations may include additions like sour cream, carrots, mushrooms,
+                                        and herbs such as thyme, sage, and bay leaves. Known for its robust flavor,
+                                        the dish is generously seasoned with pepper and sometimes flambéed with cognac.
+                                        Traditionally, it's best served alongside noodles, cabbage, and accompanied by a glass of local wine.</p></div>
+                                    <br />
+                                    <div><strong>Ingredients:</strong></div>
+                                    <div>1 young hare of about 2 kilos with its blood and liver, 1 teaspoon wine vinegar, 100 – 150 g speck, 200 g boletus or wild mushrooms, parsley</div>
+                                    <div>a little fat, 2 tablespoons of flour, 3 tablespoons cognac, ½ litre soured cream, 1 slice of bread</div>
+                                    <div>Marinade:</div>
+                                    <div>1 bottle of good red wine (preferably Burgundy), 3 shallots, 1 carrot, 3 cloves garlic, best olive oil, sage, thyme, bay leaves, cloves and tarragon</div>
+                                    <br />
+                                    <div><strong>Procedure:</strong></div>
+                                    <div>If there is no blood in the hare, ask the butcher for a cup of calf's blood. Cut the hare into segments, being careful not to splinter the bones. Put the hare pieces in the marinade ensuring it is fully covered, and leave in the refrigerator for two or three days. Move the pieces about twice daily.</div>
+                                    <div>Chop the speck, put it in cold water and bring to the boil, then dry in a sieve. Fry the speck in some fat until crisp.</div>
+                                    <div>In the meantime take the hare from the marinade and allow to dry. Put the hare pieces in the hot fat. Flambé with the cognac, stirring thoroughly.</div>
+                                    <div>Pour the flour over the meat, and steadily add the marinade until the meat is covered. Add the vegetables and herbs.</div>
+                                    <div>Cover the pot and cook on a low heat for about 1½ hours. A quarter of an hour before completion, add the Mushrooms.</div>
+                                    <div>Serve the hare pieces on a preheated plate. Carefully sieve the cooked marinade and pour it back into the pot, adding the speck. Continue to cook.</div>
+                                    <div>Mix together the blood, the liver and the soured cream, adding some cognac. Then stir this into the contents of the pot. It should cook no more. It is now ready to serve.</div>
+                                    <div>Serve with noodles and red cabbage. A good red wine is a vital accompaniment.</div>
+                                {% endif %}
+
+                                {% if food=='Judd-mat-gaardebounen' %}
+                                    <div><em><strong>This Dish is Judd-mat-gaardebounen</strong></em></div>
+                                    <div><p>Judd mat gaardebounen, also known as smoked collar of pork with broad beans,
+                                        stands as a cherished Luxembourgish specialty and is often hailed as the national dish.
+                                        The preparation involves simmering the pork collar in water with assorted vegetables
+                                        and herbs like leeks, carrots, onions, celery, bay leaves, cloves, savory, and peppercorns,
+                                        sometimes with the addition of wine, until the meat reaches a tender consistency.
+                                        Following the cooking process, the smoked pork collar is sliced and combined with
+                                        a creamy sauce made from roux, fresh cream, dry white wine, stock or water,
+                                        blanched broad beans, bacon, and herbs. It is then served alongside boiled or fried potatoes.
+                                        This dish is traditionally prepared in early summer in Luxembourg, as this is when
+                                        the broad beans are at their freshest and most tender.</p></div>
+                                    <br />
+                                    <div><strong>Ingredients:</strong></div>
+                                    <div>160g frozen broad beans, 160g cooked Judd (smoked pork), 3 spring onions</div>
+                                    <div>1 tsp summer savoury (Bounekraitchen), 1 tsp sesame oil, pepper, 29 round dumpling wrappers*</div>
+                                    <div>To serve: Soy sauce, Toasted sesame oil, Grated ginger</div>
+                                    <br />
+                                    <div><strong>Procedure:</strong></div>
+                                    <div>Cook the broad beans in boiling salted water for 5 minutes. Drain, then rinse under a cold running tap to cool.</div>
+                                    <div>Cut the pork into chunks, trim and slice the spring onions. Put the broad beans, pork, spring onions, summer savoury and sesame oil in a food processor. Season with pepper and whizz until you have a chunky paste.</div>
+                                    <div>Put a heaped teaspoon of the filling in the middle of a dumpling wrapper. Dip your index finger into a small bowl of water, and moisten the edges of the wrapper, so that you get a wet circle around the filling.</div>
+                                    <div>Fold the wrapper over to enclose filling. Hold in both hands and, starting at one end, pleat the edges by making small overlapping folds, pressing to seal as you go. Transfer each finished dumpling onto a piece of baking paper until you have stuffed all the dumplings in this way.</div>
+                                    <div>To make potstickers: Put a bit of vegetable oil into a frying pan. Sit the dumplings in the pan and pour enough boiling water into the pan so it reaches up to half the height of the dumplings. Cover with a lid and leave to boil until all the liquid has evaporated and the bottoms of the dumplings are crispy.</div>
+                                    <div>To steam in a steam oven: cut out a piece of baking paper to fit inside a perforated steaming tray. Sit the dumplings onto the baking paper and steam in the steam oven for 8 minutes at 100°C.</div>
+                                    <div>To steam in a bamboo basket: cut out a piece of baking paper to fit inside a bamboo steamer. Sit the dumplings onto the baking paper. Put the bamboo steamer into a large wok over a high heat. Pour some boiling water into the bottom of the wok – it’s important that the water level is lower than the platform on which the dumplings sit, so that the dumplings are steamed and not boiled. Place the lid onto the bamboo steamer and steam for 8 minutes.</div>
+                                    <div>To make the dipping sauce, pour a bit of soy sauce into a dipping bowl. Add a gleg of toasted sesame oil and a bit of grated ginger and stir.</div>
+                                    <div>Serve the hot dumplings with the soy dipping sauce.</div>
+                                {% endif %}
+
+                                {% if food=='Kniddelen' %}
+                                    <div><em><strong>This Dish is Kniddelen</strong></em></div>
+                                    <div><p>Kniddelen represent a classic Luxembourgish dish, featuring dumplings crafted
+                                        from a mixture of flour, eggs, and milk. The dense batter is spooned into boiling water,
+                                        and once the dumplings float to the surface, they're cooked through.
+                                        These versatile dumplings can be enjoyed in various ways: in soups, alongside stews
+                                        and casseroles, or in the traditional manner, paired with bacon fried in butter
+                                        and its accompanying juices. It's suggested to complement the dish with a glass of white Luxembourg wine.</p></div>
+                                    <br />
+                                    <div><strong>Ingredients:</strong></div>
+                                    <div>For the Kniddelen: 375g flour, 150g Luxlait quark (40% fat content), 3 eggs, 190ml Luxlait milk, ½ tsp salt, pepper</div>
+                                    <div>For the sauce: 200g cooked Luxlait Kachkéis, 40% fat content, 200ml white wine, 440ml Luxlait cream</div>
+                                    <div>8 tsp mustard, 8 tsp cornstarch, 90g rocket, 4 tbsp walnuts (chopped), salt and pepper</div>
+                                    <br />
+                                    <div><strong>Procedure:</strong></div>
+                                    <div>Put all the Kniddelen ingredients into a large bowl and mix with an electric whisk until you get a smooth batter. Season with salt and pepper.</div>
+                                    <div>Fill a large saucepan with boiling water and add a generous pinch of salt. Grab portions of batter with a teaspoon, and dip it into the boiling water, pushing the batter off the spoon with a second spoon, so it slides into the saucepan and sinks to the bottom. Repeat until the bottom of the saucepan is covered with dumplings.</div>
+                                    <div>Keep boiling until the dumplings float to the surface – then leave them to cook for another 2 minutes. Remove the dumplings from the water with a slotted spoon and put into a bowl. Repeat this process until all the batter is used up.</div>
+                                    <div>Once they’re boiled, put the Kniddelen into a bowl, which you cover with a lid between additions to keep the Kniddelen warm.</div>
+                                    <div>For the sauce: Put the Kachkéis and white wine into a saucepan and bring to the boil while stirring. Leave to cook for a minute, then add the cream and the mustard and heat through.</div>
+                                    <div>In a little jar dilute the cornstarch with a few tablespoons of the Kachkéis sauce, add back to the sauce and cook for a couple of minutes so the sauce thickens. Season with salt and pepper, then add almost all the rocket and stir through. Add the cooked Kniddelen to the saucepan with the Kachkéis sauce and stir so that the pasta is evenly coated in sauce.</div>
+                                    <div>Divide between four plates and sprinkle each portion with chopped walnuts and top with a bit of remaining rocket for decoration.</div>
+                                {% endif %}
+
+                                {% if food=='Quetschentaart' %}
+                                    <div><em><strong>This Dish is Quetschentaart</strong></em></div>
+                                    <div><p>Quetschentaart, also known as quetscheflued, represents a traditional Luxembourgish
+                                        dessert made with damson plums, popularly enjoyed during the autumn months when these plums are ripe.
+                                        The tart begins with a firm dough crafted from flour, sugar, butter, salt, and eggs,
+                                        which is then rolled out and carefully fitted into a buttered tart tin. Fresh damson plum
+                                        slices are arranged atop the dough, and the tart is baked until golden brown.
+                                        For an added touch of flavor and fragrance, powdered vanilla sugar can be sprinkled over the tart.
+                                        To complement its sweet taste, Quetschentaart pairs wonderfully with whipped cream, crème fraîche,
+                                        or a scoop of ice cream. This delightful fruit tart is readily available at pastry shops, bakeries,
+                                        and restaurants across Luxembourg, especially during the damson plum season.</p></div>
+                                    <br />
+                                    <div><strong>Ingredients:</strong></div>
+                                    <div>125g butter (softened), 50g sugar, 1 egg, 250g flour, 1 pinch of salt, 500g plums</div>
+                                    <br />
+                                    <div><strong>Procedure:</strong></div>
+                                    <div>Prepare the dough: Beat the butter with the sugar, then add the egg and beat until fluffy.</div>
+                                    <div>Sift in the flour and salt and quickly knead into a firm dough. Wrap in cling film and put into the fridge for 30 minutes.</div>
+                                    <div>Preheat the fan oven to 200° Celsius. Roll out the dough and put into a buttered tart tin.</div>
+                                    <div>Wash the plums, halve, remove the stone and cut into six wedges.</div>
+                                    <div>Arrange the plum slices in circles on the tart base. Bake for 40 minutes or until the base seems not too soggy anymore (it will always remain slightly soggy because of the plum juice that oozes from the fruit).</div>
+                                {% endif %}
+
+                                {% if food=='Verwurelter' %}
+                                    <div><em><strong>This Dish is Verwurelter</strong></em></div>
+                                    <div><p>Verwurelter represent a classic Luxembourgish treat, crafted from a blend of flour,
+                                        butter, yeast, warm milk, sugar, eggs, and salt. The dough is formed into knots
+                                        and fried until they turn a golden hue. These donuts are airy and delightful,
+                                        often coated with powdered or granulated sugar, and can be savored either warm or chilled.
+                                        In Luxembourg, verwurelter holds a special place as a festival favorite,
+                                        particularly prepared for Fuesecht, which is akin to the German Fasching or Karnival celebrations.</p></div>
+                                    <br />
+                                    <div><strong>Ingredients:</strong></div>
+                                    <div>500g flour, 42g fresh yeast, 120g sugar, 125ml milk, lukewarm, 80g butter (room temperature)</div>
+                                    <div>2 eggs, 1⁄4 tsp salt, 40ml rum, 2kg fat for deep-frying</div>
+                                    <div>To serve: icing sugar, cinnamon, damson jam (Quetschekraut)</div>
+                                    <br />
+                                    <div><strong>Procedure:</strong></div>
+                                    <div>For the ‘starter’, place the flour into a large mixing bowl and create a well in the center. Crumble the yeast into a jar and combine it with the lukewarm milk and 1 tablespoon of sugar until dissolved. Pour the yeasty milk into the well, ensuring the liquid remains contained within the well.</div>
+                                    <div>Stir the milk mixture inside the well with some flour from the sides to form a loose dough. Sprinkle a bit of flour from the sides of the well over the mixture. Cover the bowl with a damp tea towel and let it rise at room temperature for 30 minutes.</div>
+                                    <div>After the 30 minutes, add the remaining sugar, butter, eggs, and salt to the ‘starter’ and mix with the kneading attachment of an electric hand or stand mixer. Once the dough starts to come together, add the rum and continue to work it into a smooth dough, using your hands if necessary. Cover the bowl with the tea towel and let it rise at room temperature for 1 hour.</div>
+                                    <div>After 1 hour, remove the dough from the bowl and place it on a floured surface. Knock the dough back by briefly kneading it, then roll it out to a thickness of 1 cm. Cut the dough into long strips approximately 10 x 2 cm in size. Tie each strip into a loose knot and place them onto a baking tray. Cover the knots with a dry tea towel and let them rise at room temperature for 30 minutes.</div>
+                                    <div>While the knots are rising, heat the oil to 180°C in a deep-fat fryer (without the basket) or in a deep saucepan.</div>
+                                    <div>Fry the knots in batches to avoid overcrowding, ensuring there is enough room for all the knots to float on the surface. Fry for 1 1⁄2 to 2 minutes on one side until well browned, then flip them over to brown the other side. Remove the fried knots with a slotted spoon and place them onto kitchen paper to drain some of the oil.</div>
+                                    <div>Just before serving, mix the icing sugar with some cinnamon and sprinkle it over the Verwuerelter. Serve with damson jam on the side.</div>
+                                    <div>TIP: These Verwuerelter freeze incredibly well. Simply freeze them on the day of making without the icing sugar and reheat them in the microwave for a few seconds.</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded">
+                            <h2 class="section-heading mb-4">
+                                <span class="section-heading-upper">Responsibility & Accountability</span>
+                                <span class="section-heading-lower">DISCLAIMER</span>
+                            </h2>
+                            <p class="mb-0">The projects showcased, encompassing house price prediction, news sentiment
+                                an</p>
+                            <p class="mb-0">alyses, itinerary generation, and food image classification, serve
+                                exclusively as educational and research endeavors within the realms of machine learning,
+                                deep learning, and data science. They are not designed for practical application in
+                                financial, travel, journalistic, or any consequential decision-making domains. Users are
+                                strongly advised against utilizing the generated predictions for real-world purposes.
+                                The creator assumes no liability for any outcomes resulting from the reliance on or
+                                misuse of the provided information. It is imperative for users to exercise discernment
+                                and consult appropriate experts or sources before making any significant decisions.
+                                These projects are intended solely for academic exploration and do not constitute
+                                professional advice or endorsement of any kind.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container"><p class="m-0">Created By Udit Gagnani</p></div>
+        </footer>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap Multiselect -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+        <!-- Your custom JS -->
+        <script src="static/scripts.js"></script>
+    </body>
+</html>

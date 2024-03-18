@@ -1,0 +1,304 @@
+<!--rgba(234, 20, 29, 0.5), rgba(81, 173, 218, 0.9)-->
+<!--rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25), url("../static/img/bg2.jpg")-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>LU-EXPLORE</title>
+        <link rel="icon" type="image/x-icon" href="static/MYLOGO.jpg" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="static/style.css" rel="stylesheet" />
+    </head>
+    <body style="background-image: url('../static/img/intro2.jpg');">
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">LU-EXPLORE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/">Home</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="properties.html">LU-PROPERTIES</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="news.html">LU-NEWS</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="itinerary.html">LU-ITINERARY</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="food.html">LU-FOOD</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded" >
+                            <h2 class="section-heading mb-5">
+                                <span class="section-heading-upper">LU-PROPERTIES</span>
+                                <span class="section-heading-lower">PREDICT HOUSE PRICE</span>
+                            </h2>
+
+                            <form action="submit_properties" method="POST" novalidate>
+                                <div class="row" style="max-width: 75%; margin: 0 auto;">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline">
+                                            {% if area %}
+                                                <input type="text" value="{{ area }}" placeholder="Surface Area in Square meters" name="formArea" class="form-control" required/>
+                                            {% else %}
+                                                <input type="text" placeholder="Surface Area in Square meters" name="formArea" class="form-control" required/>
+                                            {% endif %}
+                                            <div class="valid-feedback">Area validated</div>
+                                            <div class="invalid-feedback">Please Enter a valid Surface Area</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto"></div>
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline">
+                                            {% if bedrooms %}
+                                                <input type="text" value="{{ bedrooms }}" placeholder="Number of Bedrooms" name="formBedrooms" class="form-control" required/>
+                                            {% else %}
+                                                <input type="text" placeholder="Number of Bedrooms" name="formBedrooms" class="form-control" required/>
+                                            {% endif %}
+                                            <div class="valid-feedback">Bedrooms validated</div>
+                                            <div class="invalid-feedback">Please Enter a valid Number</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4" style="max-width: 75%; margin: 0 auto;">
+<!--                                    <div class="col">-->
+<!--                                        <div class="dropdown">-->
+<!--                                            <button class="btn dropdown-toggle" type="button" id="multiSelectDropdownButton" style="min-width: 100%; background-color: white; color: black;">-->
+<!--                                                Facilities Available-->
+<!--                                            </button>-->
+<!--                                            <div class="dropdown-menu" aria-labelledby="multiSelectDropdownButton" style="min-width: 100%;">-->
+<!--                                                <div class="dropdown-content">-->
+<!--                                                    <select id="multiSelectOptions" multiple style="height: 100%; min-width: 100%;" required>-->
+<!--                                                        <option value="" selected>Facilities</option>-->
+<!--                                                        <option value="option1">Attic</option>-->
+<!--                                                        <option value="option2">Garden</option>-->
+<!--                                                        <option value="option3">Balcony</option>-->
+<!--                                                        <option value="option4">Basement</option>-->
+<!--                                                        <option value="option5">Terrace</option>-->
+<!--                                                    </select>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="valid-feedback">Selection validated</div>-->
+<!--                                            <div class="invalid-feedback">Please Enter a valid Option</div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                    <div class="col">
+                                        <div class="dropdown">
+                                            <button class="btn dropdown-toggle" type="button" id="multiSelectDropdownButton" style="min-width: 100%; background-color: white; color: black;">
+                                                Facilities Available
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="multiSelectDropdownButton" style="height: 100%; min-width: 100%;">
+                                                <div class="dropdown-content">
+                                                    <select id="formFacilities" name="formFacilities" multiple style="min-width: 100%;">
+                                                        <option value="" disabled {% if not facilities %}selected{% endif %}>Facilities</option>
+                                                        {% for option in options2 %}
+                                                            {% if facilities and option in facilities %}
+                                                                <option value="{{ option }}" selected>{{ option }}</option>
+                                                            {% else %}
+                                                                <option value="{{ option }}">{{ option }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto"></div>
+                                    <div class="col">
+                                        <div class="dropdown">
+                                            <select id="formCommune" name="formCommune" class="btn dropdown-toggle form-select" aria-label="Default select example" style="min-width: 100%; background-color: white; color: black;" required>
+                                                <option value="" {% if not commune %} selected {% endif %}>Commune</option>
+                                                {% for option in options %}
+                                                    {% if commune and option == commune %}
+                                                        <option value="{{ option }}" selected>{{ option }}</option>
+                                                    {% else %}
+                                                        <option value="{{ option }}">{{ option }}</option>
+                                                    {% endif %}
+                                                {% endfor %}
+<!--                                                <option value="" selected>Commune</option>-->
+<!--                                                <option value="Alzingen">Alzingen</option>-->
+<!--                                                <option value="Aubange">Aubange</option>-->
+<!--                                                <option value="Bascharage">Bascharage</option>-->
+<!--                                                <option value="Baschleiden">Baschleiden</option>-->
+<!--                                                <option value="Bech-Kleinmacher">Bech-Kleinmacher</option>-->
+<!--                                                <option value="Beckerich">Beckerich</option>-->
+<!--                                                <option value="Berbourg">Berbourg</option>-->
+<!--                                                <option value="Bereldange">Bereldange</option>-->
+<!--                                                <option value="Beringen">Beringen</option>-->
+<!--                                                <option value="Bettendorf">Bettendorf</option>-->
+<!--                                                <option value="Bettembourg">Bettembourg</option>-->
+<!--                                                <option value="Bissen">Bissen</option>-->
+<!--                                                <option value="Biwer">Biwer</option>-->
+<!--                                                <option value="Bitburg">Bitburg</option>-->
+<!--                                                <option value="Bollendorf-Pont">Bollendorf-Pont</option>-->
+<!--                                                <option value="Boxhorn">Boxhorn</option>-->
+<!--                                                <option value="Bridel">Bridel</option>-->
+<!--                                                <option value="Buederscheid">Buederscheid</option>-->
+<!--                                                <option value="Capellen">Capellen</option>-->
+<!--                                                <option value="Clemency">Clemency</option>-->
+<!--                                                <option value="Colmar-Berg">Colmar-Berg</option>-->
+<!--                                                <option value="Cruchten">Cruchten</option>-->
+<!--                                                <option value="Crauthem">Crauthem</option>-->
+<!--                                                <option value="Dalheim">Dalheim</option>-->
+<!--                                                <option value="Diekirch">Diekirch</option>-->
+<!--                                                <option value="Differdange">Differdange</option>-->
+<!--                                                <option value="Dippach">Dippach</option>-->
+<!--                                                <option value="Dudelange">Dudelange</option>-->
+<!--                                                <option value="Dubai">Dubai</option>-->
+<!--                                                <option value="Echternach">Echternach</option>-->
+<!--                                                <option value="Ell">Ell</option>-->
+<!--                                                <option value="Erpeldange">Erpeldange</option>-->
+<!--                                                <option value="Erpeldange (Ettelbruck)">Erpeldange (Ettelbruck)</option>-->
+<!--                                                <option value="Esch-sur-Alzette">Esch-sur-Alzette</option>-->
+<!--                                                <option value="Esch-sur-Sûre">Esch-sur-Sûre</option>-->
+<!--                                                <option value="Eischen">Eischen</option>-->
+<!--                                                <option value="Fingig">Fingig</option>-->
+<!--                                                <option value="Flaxweiler">Flaxweiler</option>-->
+<!--                                                <option value="Garnich">Garnich</option>-->
+<!--                                                <option value="Grevenmacher">Grevenmacher</option>-->
+<!--                                                <option value="Grevels">Grevels</option>-->
+<!--                                                <option value="Hellange">Hellange</option>-->
+<!--                                                <option value="Heisdorf">Heisdorf</option>-->
+<!--                                                <option value="Hautcharage">Hautcharage</option>-->
+<!--                                                <option value="Hobscheid">Hobscheid</option>-->
+<!--                                                <option value="Hosingen">Hosingen</option>-->
+<!--                                                <option value="Hupperdange">Hupperdange</option>-->
+<!--                                                <option value="Howald">Howald</option>-->
+<!--                                                <option value="Itzig">Itzig</option>-->
+<!--                                                <option value="Junglinster">Junglinster</option>-->
+<!--                                                <option value="Kehlen">Kehlen</option>-->
+<!--                                                <option value="Keispelt">Keispelt</option>-->
+<!--                                                <option value="Kayl">Kayl</option>-->
+<!--                                                <option value="Koerich">Koerich</option>-->
+<!--                                                <option value="Kopstal">Kopstal</option>-->
+<!--                                                <option value="Leudelange">Leudelange</option>-->
+<!--                                                <option value="Lieler">Lieler</option>-->
+<!--                                                <option value="Lintgen">Lintgen</option>-->
+<!--                                                <option value="Luxembourg">Luxembourg</option>-->
+<!--                                                <option value="Luxembourg-Belair">Luxembourg-Belair</option>-->
+<!--                                                <option value="Mamer">Mamer</option>-->
+<!--                                                <option value="Mensdorf">Mensdorf</option>-->
+<!--                                                <option value="Medernach">Medernach</option>-->
+<!--                                                <option value="Mersch">Mersch</option>-->
+<!--                                                <option value="Mondorf-les-Bains">Mondorf-les-Bains</option>-->
+<!--                                                <option value="Mondercange">Mondercange</option>-->
+<!--                                                <option value="Moesdorf">Moesdorf</option>-->
+<!--                                                <option value="Moutfort">Moutfort</option>-->
+<!--                                                <option value="Oberanven, Bei der Aarnescht">Oberanven, Bei der Aarnescht</option>-->
+<!--                                                <option value="Perl">Perl</option>-->
+<!--                                                <option value="Perl-Nennig">Perl-Nennig</option>-->
+<!--                                                <option value="Pétange">Pétange</option>-->
+<!--                                                <option value="Putscheid">Putscheid</option>-->
+<!--                                                <option value="Reckange">Reckange</option>-->
+<!--                                                <option value="Remich">Remich</option>-->
+<!--                                                <option value="Rodange">Rodange</option>-->
+<!--                                                <option value="Roedt">Roedt</option>-->
+<!--                                                <option value="Roder">Roder</option>-->
+<!--                                                <option value="Rumelange">Rumelange</option>-->
+<!--                                                <option value="Sanem">Sanem</option>-->
+<!--                                                <option value="Scheidgen">Scheidgen</option>-->
+<!--                                                <option value="Schengen">Schengen</option>-->
+<!--                                                <option value="Schifflange">Schifflange</option>-->
+<!--                                                <option value="Schuttrange">Schuttrange</option>-->
+<!--                                                <option value="Schwebach">Schwebach</option>-->
+<!--                                                <option value="Senningerberg">Senningerberg</option>-->
+<!--                                                <option value="Sehndorf">Sehndorf</option>-->
+<!--                                                <option value="Stegen">Stegen</option>-->
+<!--                                                <option value="Steinfort">Steinfort</option>-->
+<!--                                                <option value="Steinsel">Steinsel</option>-->
+<!--                                                <option value="Stolzembourg">Stolzembourg</option>-->
+<!--                                                <option value="Strassen">Strassen</option>-->
+<!--                                                <option value="Troisvierges">Troisvierges</option>-->
+<!--                                                <option value="Vianden">Vianden</option>-->
+<!--                                                <option value="Walferdange">Walferdange</option>-->
+<!--                                                <option value="Wallendorf-Pont">Wallendorf-Pont</option>-->
+<!--                                                <option value="Wasserbillig">Wasserbillig</option>-->
+<!--                                                <option value="Weiler">Weiler</option>-->
+<!--                                                <option value="Weiswampach">Weiswampach</option>-->
+<!--                                                <option value="Wiltz">Wiltz</option>-->
+<!--                                                <option value="Wincrange">Wincrange</option>-->
+<!--                                                <option value="Uebersyren">Uebersyren</option>-->
+                                            </select>
+                                            <div class="valid-feedback">Selection validated</div>
+                                            <div class="invalid-feedback">Please Select a valid Option</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4" style="max-width: 25%; margin: 0 auto;">
+                                    <button class="btn into-button mt-3" style="background-color: white; color: black;">Submit</button>
+                                </div>
+<!--                                <p class="address my-4">-->
+                                {% if errors %}
+                                    <div class="errors my-4">
+                                        <ul>
+                                            {% for error in errors %}
+                                                <li><em>{{ error }}</em></li>
+                                                <li><br /></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                                {% if predicted_price %}
+                                    <em>
+                                        <strong>Such a house will cost you approximately <span style="color: #000; background-color: red;">&nbsp;{{predicted_price}} euros&nbsp;</span></strong>
+                                    </em>
+                                {% endif %}
+    <!--                                    <br />-->
+    <!--                                    <strong>1116 Orchard Street</strong>-->
+    <!--                                    <br />-->
+    <!--                                    Golden Valley, Minnesota-->
+<!--                                </p>-->
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded">
+                            <h2 class="section-heading mb-4">
+                                <span class="section-heading-upper">Responsibility & Accountability</span>
+                                <span class="section-heading-lower">DISCLAIMER</span>
+                            </h2>
+                            <p class="mb-0">The projects showcased, encompassing house price prediction, news sentiment
+                                an</p>
+                            <p class="mb-0">alyses, itinerary generation, and food image classification, serve
+                                exclusively as educational and research endeavors within the realms of machine learning,
+                                deep learning, and data science. They are not designed for practical application in
+                                financial, travel, journalistic, or any consequential decision-making domains. Users are
+                                strongly advised against utilizing the generated predictions for real-world purposes.
+                                The creator assumes no liability for any outcomes resulting from the reliance on or
+                                misuse of the provided information. It is imperative for users to exercise discernment
+                                and consult appropriate experts or sources before making any significant decisions.
+                                These projects are intended solely for academic exploration and do not constitute
+                                professional advice or endorsement of any kind.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container"><p class="m-0">Created By Udit Gagnani</p></div>
+        </footer>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap Multiselect -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+        <!-- Your custom JS -->
+        <script src="static/scripts.js"></script>
+    </body>
+</html>

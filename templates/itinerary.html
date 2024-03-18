@@ -1,0 +1,158 @@
+<!--rgba(234, 20, 29, 0.5), rgba(81, 173, 218, 0.9)-->
+<!--rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25), url("../static/img/bg2.jpg")-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>LU-EXPLORE</title>
+        <link rel="icon" type="image/x-icon" href="static/MYLOGO.jpg" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="static/style.css" rel="stylesheet" />
+    </head>
+    <body style="background-image: url('../static/img/intro4.jpg');">
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">LU-EXPLORE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="/">Home</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="properties.html">LU-PROPERTIES</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="news.html">LU-NEWS</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="itinerary.html">LU-ITINERARY</a></li>
+                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="food.html">LU-FOOD</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded" >
+                            <h2 class="section-heading mb-5">
+                                <span class="section-heading-upper">LU-ITINERARY</span>
+                                <span class="section-heading-lower">GENERATE ITINERARY</span>
+                            </h2>
+                            <form action="submit_itinerary" method="POST" novalidate>
+                                <div class="row" style="max-width: 75%; margin: 0 auto;">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline">
+                                            {% if days %}
+                                                <input type="text" value="{{ days }}" placeholder="Number of Days you are planning to travel" name="formDays" class="form-control" required/>
+                                            {% else %}
+                                                <input type="text" placeholder="Number of Days you are planning to travel" name="formDays" class="form-control" required/>
+                                            {% endif %}
+                                            <div class="valid-feedback">Days validated</div>
+                                            <div class="invalid-feedback">Please Enter a valid Number</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4" style="max-width: 75%; margin: 0 auto;">
+                                    <div class="col">
+                                        <div data-mdb-input-init class="form-outline">
+                                            {% if description %}
+                                                <input type="text" value="{{ description }}" placeholder="Description: What are you looking for?" name="formDescription" class="form-control" required/>
+                                            {% else %}
+                                                <input type="text" placeholder="Description: What are you looking for?" name="formDescription" class="form-control" required/>
+                                            {% endif %}
+                                            <div class="valid-feedback">Description validated</div>
+                                            <div class="invalid-feedback">Please Enter a valid Description</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row my-4" style="max-width: 25%; margin: 0 auto;">
+                                    <button class="btn into-button mt-3" style="background-color: white; color: black;">Submit</button>
+                                </div>
+                                {% if errors %}
+                                    <div class="errors my-4">
+                                        <ul>
+                                            {% for error in errors %}
+                                                <li><em>{{ error }}</em></li>
+                                                <li><br /></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% if geniti %}
+            <section class="page-section cta">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-8 mx-auto">
+                            <div class="cta-inner bg-faded text-center rounded">
+                                <em><strong style="font-size: 1.75em;">Here is your Auto Generated Itinerary</strong></em>
+                                <div class="recommended-itinerary my-4">
+                                    <ul style="list-style-type: none;">
+                                        {% for day, segments in geniti.items() %}
+                                            <li><strong>{{ day }}:</strong></li>
+                                            {% for segment, attractions in segments.items() %}
+                                                <li><strong>{{ segment }}:</strong></li>
+                                                {% for attraction in attractions %}
+                                                    {% if "Lunch" in attraction or "Dinner" in attraction %}
+                                                        <li>{{ attraction }}</li>
+                                                    {% else %}
+                                                        <li>{{ attraction[0] }} ({{ attraction[1] }})</li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+        <section class="page-section cta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8 mx-auto">
+                        <div class="cta-inner bg-faded text-center rounded">
+                            <h2 class="section-heading mb-4">
+                                <span class="section-heading-upper">Responsibility & Accountability</span>
+                                <span class="section-heading-lower">DISCLAIMER</span>
+                            </h2>
+                            <p class="mb-0">The projects showcased, encompassing house price prediction, news sentiment
+                                an</p>
+                            <p class="mb-0">alyses, itinerary generation, and food image classification, serve
+                                exclusively as educational and research endeavors within the realms of machine learning,
+                                deep learning, and data science. They are not designed for practical application in
+                                financial, travel, journalistic, or any consequential decision-making domains. Users are
+                                strongly advised against utilizing the generated predictions for real-world purposes.
+                                The creator assumes no liability for any outcomes resulting from the reliance on or
+                                misuse of the provided information. It is imperative for users to exercise discernment
+                                and consult appropriate experts or sources before making any significant decisions.
+                                These projects are intended solely for academic exploration and do not constitute
+                                professional advice or endorsement of any kind.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer text-faded text-center py-5">
+            <div class="container"><p class="m-0">Created By Udit Gagnani</p></div>
+        </footer>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap Multiselect -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
+        <!-- Your custom JS -->
+        <script src="static/scripts.js"></script>
+    </body>
+</html>
