@@ -159,7 +159,8 @@ def validate_itinerary_form(days, description):
 
 @app.route('/food.html')
 def food():
-    return render_template('food.html')
+    template = render_template('food.html')
+    return template
 
 
 @app.route('/submit_food', methods=['POST'])

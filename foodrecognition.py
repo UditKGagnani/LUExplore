@@ -2,18 +2,18 @@ from all_imports import *
 
 
 def preprocess_image(image_path):
-    image = cv2.imread(image_path)
-    image = cv2.resize(image, (128, 128))
-    image = image.astype(np.float32) / 255.0
-    image = preprocess_input(image)
-    image = np.expand_dims(image, axis=0)
-    return image
+    img = cv2.imread(image_path)
+    img = cv2.resize(img, (128, 128))
+    img = img.astype(np.float32) / 255.0
+    img = preprocess_input(img)
+    img = np.expand_dims(img, axis=0)
+    return img
 
 
 def predict_with_vgg_model(image_path):
-    vgg_model = load_model('vgg_model.h5')
-    image = preprocess_image(image_path)
-    prediction = vgg_model.predict(image)
+    vgg_model = load_model('vgg_model2.h5')
+    img = preprocess_image(image_path)
+    prediction = vgg_model.predict(img)
     predicted_class = np.argmax(prediction)
 
     print("Predicted Class:", predicted_class)

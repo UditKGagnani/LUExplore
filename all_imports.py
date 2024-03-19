@@ -10,7 +10,7 @@ import tensorflow as tf
 from flask import Flask, render_template, request
 from keras.applications.vgg19 import preprocess_input
 from keras.models import load_model
-from keras.preprocessing.image import img_to_array, load_img
+from keras.preprocessing import image
 from keras.utils import to_categorical
 from lightgbm import LGBMRegressor
 from newsanalysis import sentiment_score
